@@ -9,7 +9,16 @@ namespace Alduin.Server.Modules
     public class GetPathes
     {
         private static string MainPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-        private static string SolutionMainPath = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent?.Parent?.FullName;
+        public static string getSolutionMainPath()
+        {
+#if (!DEBUG)
+            // Release
+            return new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).FullName;
+#else
+                // Debug
+                return new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent?.Parent?.FullName;
+#endif
+        }
         public static string Get_LocalPath()
         {
             string local_path = MainPath.Replace(@"file:\", "");
@@ -17,15 +26,15 @@ namespace Alduin.Server.Modules
         }
         public static string Get_SolutionMainPath()
         {
-            return SolutionMainPath;
+            return getSolutionMainPath();
         }
         public static string Get_TorPath()
         {
-            return Path.Combine(SolutionMainPath, "Tor");
+            return Path.Combine(getSolutionMainPath(), "Tor");
         }
         public static string Get_LogPath()
         {
-            return Path.Combine(SolutionMainPath, "Log");
+            return Path.Combine(getSolutionMainPath(), "Log");
         }
     }
 }

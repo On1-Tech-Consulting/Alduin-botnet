@@ -118,7 +118,16 @@ namespace Alduin.Web.Controllers
             try
             {
                 var getImagesStatus = "";
-                appsettingsModel appsettings = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/Alduin.Web/appsettings.json"), new appsettingsModel());
+#if (!DEBUG)
+                    // Release
+                    appsettingsModel appsettings = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/appsettings.json"), new appsettingsModel());
+                
+#else
+                
+                    // Debug
+                    appsettingsModel appsettings = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/Alduin.Web/appsettings.json"), new appsettingsModel());
+                
+#endif
                 GetImgJsonModel ImagesJsonModel;
                 var query = new GetBotByIdQuery
                 {

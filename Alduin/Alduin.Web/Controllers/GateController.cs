@@ -28,7 +28,13 @@ namespace Alduin.Web.Controllers
             if (!ModelState.IsValid)
                 return Json(new { success = false, result = "Invalid Model" });
 
+#if (!DEBUG)
+            // Release
+            appsettingsModel JsonString = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/appsettings.json"), new appsettingsModel());
+#else
+            // Debug
             appsettingsModel JsonString = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/Alduin.Web/appsettings.json"), new appsettingsModel());
+#endif
             if (JsonString.Stump.KeyCertified != model.KeyCertified)
                 return Json(new { success = false, result = "Key does not match" });
             var Keyquery = new GetBotByKeyUniqueQuery { KeyUnique = model.KeyUnique };

@@ -14,14 +14,32 @@ namespace Alduin.Web
     {
         public static void Main(string[] args)
         {
-            appsettingsModel appsettings = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/Alduin.Web/appsettings.json"), new appsettingsModel());
-            if (appsettings.Tor.RunItStart)
+            Console.WriteLine("Starting");
+            try 
             {
-                Thread thr = new Thread(new ThreadStart(ConfigTor.StartTor));
-                Thread thrCD = new Thread(new ThreadStart(CloseDetector.Detecter));
-                thr.Start();
-                thrCD.Start();
-            } 
+#if (!DEBUG)
+                
+                    // Release
+                    appsettingsModel appsettings = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/appsettings.json"), new appsettingsModel());
+                
+#else
+                
+                    // Debug
+                    appsettingsModel appsettings = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/Alduin.Web/appsettings.json"), new appsettingsModel());
+                
+#endif
+                if (appsettings.Tor.RunItStart)
+                {
+                    Thread thr = new Thread(new ThreadStart(ConfigTor.StartTor));
+                    Thread thrCD = new Thread(new ThreadStart(CloseDetector.Detecter));
+                    thr.Start();
+                    thrCD.Start();
+                } 
+            }
+            catch (Exception e) 
+            {
+                Console.Write(e.ToString());
+            };
             CreateWebHostBuilder(args).Build().Run();
         }
 

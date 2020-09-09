@@ -4,6 +4,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <ApplicationIcon>os_kali_jFt_icon.ico</ApplicationIcon>
+    <OutputType>Exe</OutputType>
+    <StartupObject>Alduin.Web.Program</StartupObject>
   </PropertyGroup>
 
 
@@ -34,5 +37,15 @@
   <ItemGroup>
     <Folder Include="wwwroot\img\Bots\" />
     <Folder Include="wwwroot\files\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="Log\Log.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Run.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

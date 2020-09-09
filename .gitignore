@@ -84,3 +84,11 @@ Alduin/Alduin.Web/Properties/
 Alduin/Alduin.Server/bin/
 
 Alduin/Alduin.Web/.config/
+
+Alduin/publish/
+
+Alduin/Alduin.TestDatabaseCreator/bin/
+
+Alduin/Alduin.TestDatabaseCreator/Properties/
+
+Alduin/Alduin.DatabaseCreator/Properties/

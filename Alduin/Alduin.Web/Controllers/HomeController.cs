@@ -35,7 +35,7 @@ namespace Alduin.Web.Controllers
         {
             if (User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value == "Admin")
             {
-                appsettingsModel appsettings = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/Alduin.Web/appsettings.json"), new appsettingsModel());
+                appsettingsModel appsettings = JsonConvert.DeserializeAnonymousType(ServerFileManager.FileReader(GetPathes.Get_SolutionMainPath() + "/appsettings.json"), new appsettingsModel());
                 return View(appsettings);
             }
             else
@@ -51,7 +51,15 @@ namespace Alduin.Web.Controllers
             if (User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value == "Admin")
             {
                 var json = JsonConvert.SerializeObject(model);
-                ServerFileManager.FileWriter(GetPathes.Get_SolutionMainPath() + "/Alduin.Web/appsettings.json", json);
+
+#if (!DEBUG)
+                    // Release
+                    ServerFileManager.FileWriter(GetPathes.Get_SolutionMainPath() + "/appsettings.json", json);
+#else
+
+                    // Debug
+                    ServerFileManager.FileWriter(GetPathes.Get_SolutionMainPath() + "/Alduin.Web/appsettings.json", json);
+#endif
                 ViewData["Result"] = "ok";
                 return View(model);
             }
