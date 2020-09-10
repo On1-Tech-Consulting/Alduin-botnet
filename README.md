@@ -3,7 +3,7 @@
 ## Release: https://github.com/mogyiii/Alduin-botnet/releases/tag/1.1
 ## Install:
 1. Install Python and PostgreSQL
-2. Open DataBaseCreator and overwrite connect database in appsettings.json.
+2. Open DataBaseCreator and overwrite connect database in appsettings.json and copy Panel.
 3. Import "Alduin/DataBaseCreator/DB/_CreateSchema.sql".
 4. Run "Alduin/DataBaseCreator/Alduin.DatabaseCreator.exe" and follow the instructions.
 5. Run "Alduin/Alduin.Web.exe" and Open "https://127.0.0.1:5001"
